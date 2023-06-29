@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hznubooks.mapper.BookMapper">
+  <select id="getBooks" resultType="Book">
+    select * from book;
+  </select>
+  <insert id="addBook">
+    insert into book(bookid,bookname, author, publisher, category, status)
+    values(null,#{bookname},#{author},#{publisher},#{category},#{status})
+  </insert>
+  <delete id="delBook">
+    delete from book where bookid = #{bookid}
+  </delete>
+  <update id="updateBook">
+    update book
+    set status = 0
+    where bookid = #{bookid}
+  </update>
+  <update id="borrowBook">
+    update book
+    set status = 1
+    where bookid = #{bookid}
+  </update>
+</mapper>

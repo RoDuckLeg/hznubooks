@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hznubooks.mapper.UserMapper">
+  <select id="getUsers" resultType="User">
+    select * from user;
+  </select>
+  <select id="getInfoByUsername" parameterType="String" resultType="User">
+    select * from user where username = #{username}
+  </select>
+  <update id="updateUser">
+    update user
+    set username = #{username}, password = #{password}, name = #{name}, phone=#{phone}, type =#{type},number = #{number}
+    where username = #{username}
+  </update>
+  <insert id="addUser">
+    insert into user(userid,username,password,name,phone,type,number)
+    values(null,#{username},#{password},#{name},#{phone},#{type},#{number})
+  </insert>
+  <select id="getUsersByType">
+    select * from user where type = #{type}
+  </select>
+  <delete id="delUser">
+    delete from user where userid = #{userid}
+  </delete>
+</mapper>

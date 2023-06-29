@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hznubooks.mapper.RecordMapper">
+  <select id="getRecords" resultType="Record">
+    select * from record;
+  </select>
+  <select id="getRecordByUsername" parameterType="String" resultType="Record">
+    select * from record where username = #{username}
+  </select>
+  <update id="updateRecord">
+    update record
+    set returndate=current_timestamp, isreturn=1, price=#{price}
+    where recordid = #{recordid}
+  </update>
+  <insert id="addRecord">
+    insert into record(recordid,username,bookid,borrowdate,returndate,isreturn,price)
+    values(null,#{username},#{bookid},current_timestamp,current_timestamp,0,0)
+  </insert>
+</mapper>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <link rel="stylesheet" href="./static/css/style.css">-->
+    <title>用户中心</title>
+    <link rel="icon" href="../static/favicon.ico" type="image/x-icon"/>
+    <script src="../static/js/main.js"></script>
+</head>
+<style>
+    /*********** 声明公共元素样式 ***********/
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: #efefef;
+    }
+    li {
+        list-style-type: none;
+    }
+    a {
+        color:#000;
+        text-decoration-line: none;
+    }
+    a:hover {
+        color: brown;
+        text-decoration-line: underline;
+    }
+    /*********** 声明顶部样式 ***********/
+    header {
+        background: linear-gradient(to top, lightgrey, #efefef);
+        margin: 10px 20px;
+        overflow: hidden;
+        height: 60px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 6px;}
+    header div {
+        width: 1200px;
+        margin: auto;
+    }
+    header h1 {
+        float: left;
+        margin-left: 20px;
+        font-weight: normal;
+        line-height: 60px;
+    }
+    header nav {
+        float: right;
+        margin-right: 20px;
+    }
+    header nav ul li {
+        float: left;
+        padding-left: 30px;
+        line-height: 80px;
+    }
+    /*********** 声明主体区样式 ***********/
+    /*侧边导航栏*/
+    main {
+        width: 1000px;  /*内容区宽度*/
+        height: 800px;
+        margin: 30px auto 0;
+        padding-left: 200px;
+        overflow: hidden;
+        /*布局参考线*/
+        /*border: 1px solid red;*/
+    }
+    main article {
+        float: left;
+        /*布局参考色块*/
+        /*background-color: #FD6FCF;*/
+        width: 100%;
+        min-height: 70%;
+        background: linear-gradient(to bottom, lightgrey, #ededed);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+    }
+    main aside {
+        float: left;
+        border-radius: 6px;
+        background:linear-gradient(to left, lightgrey, #ededed);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        width: 175px;
+        margin-left: -100%;
+        position: relative;
+        left: -197px;
+    }
+    main aside nav li {
+        line-height: 2rem;
+    }
+    main aside nav li:first-child,main aside nav li a{
+        padding: 10px 15px;
+        display: block;
+    }
+    main aside nav li a.active,main aside nav li a:hover {
+        border-left: 3px solid brown!important;
+        background: #efefef;
+        padding-left: 15px;
+        margin-left: -3px;
+    }
+    main article iframe {
+        min-width: 100%;
+        /*min-height: 70%;*/
+        margin: auto;
+        border: none;
+    }
+    main article footer p {
+        text-align: center;
+    }
+
+    /* Basic Grey */
+
+    .basic-grey {
+
+        margin-left:auto;
+
+        margin-right:auto;
+
+        max-width: 500px;
+
+        background: #F7F7F7;
+
+        padding: 25px 15px 25px 10px;
+
+        font: 12px Georgia, "Times New Roman", Times, serif;
+
+        color: #888;
+
+        text-shadow: 1px 1px 1px #FFF;
+
+        border:1px solid #E4E4E4;
+
+    }
+
+    .basic-grey h1 {
+
+        font-size: 25px;
+
+        padding: 0px 0px 10px 40px;
+
+        display: block;
+
+        border-bottom:1px solid #E4E4E4;
+
+        margin: -10px -15px 30px -10px;;
+
+        color: #888;
+
+    }
+
+    .basic-grey h1>span {
+
+        display: block;
+
+        font-size: 11px;
+
+    }
+
+    .basic-grey label {
+
+        display: block;
+
+        margin: 0px;
+
+    }
+
+    .basic-grey label>span {
+
+        float: left;
+
+        width: 20%;
+
+        text-align: right;
+
+        padding-right: 10px;
+
+        margin-top: 10px;
+
+        color: #888;
+
+    }
+
+    .basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select {
+
+        border: 1px solid #DADADA;
+
+        color: #888;
+
+        height: 30px;
+
+        margin-bottom: 16px;
+
+        margin-right: 6px;
+
+        margin-top: 2px;
+
+        outline: 0 none;
+
+        padding: 3px 3px 3px 5px;
+
+        width: 70%;
+
+        font-size: 12px;
+
+        line-height:15px;
+
+        box-shadow: inset 0px 1px 4px #ECECEC;
+
+        -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+
+        -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+
+    }
+
+    .basic-grey textarea{
+
+        padding: 5px 3px 3px 5px;
+
+    }
+
+    .basic-grey select {
+
+        /*background: #FFF url('down-arrow.png') no-repeat right;*/
+
+        /*background: #FFF url('down-arrow.png') no-repeat right);*/
+
+        appearance:none;
+
+        -webkit-appearance:none;
+
+        -moz-appearance: none;
+
+        text-indent: 0.01px;
+
+        text-overflow: '';
+
+        width: 70%;
+
+        height: 35px;
+
+        line-height: 25px;
+
+    }
+
+    .basic-grey textarea{
+
+        height:100px;
+
+    }
+
+    .basic-grey .button {
+
+        background: #E27575;
+
+        border: none;
+
+        padding: 10px 25px 10px 25px;
+
+        color: #FFF;
+
+        box-shadow: 1px 1px 5px #B6B6B6;
+
+        border-radius: 3px;
+
+        text-shadow: 1px 1px 1px #9E3F3F;
+
+        cursor: pointer;
+
+    }
+    /*修改个人信息的css*/
+    .basic-grey .button:hover {
+
+        background: #CF7A7A
+
+    }
+    /*图书查询的css*/
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+        background-color: #b9b9b9;
+        color: white;
+    }
+</style>
+<body>
+<!--顶部信息区-->
+<header role="header">
+    <div>
+        <h1>杭州师范大学图书馆</h1>
+        <nav role="user">
+            <ul>
+                <li><a id="welcome">welcome</a></li>
+                <li><a id="btn-log">退出登录</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!--圣杯二列布局-->
+<main role="main"style="
+    height: 2000px;
+">
+    <!--主体内联框架区-->
+    <article role="content">
+<!--sys管理用户-->
+        <div class="mainbar" id="div1">
+            <form action="" method="post" class="basic-grey">
+                <h1>管理图书管理员
+                </h1>
+                <div id="lifemanager">
+                    <table>
+                        <tr>
+                            <th>用户id</th><th>管理员账号</th><th>管理员名字</th><th>管理员手机</th><th>删除</th>
+                        </tr>
+                        <tr>
+                            <td>1</td><td>admin1</td><td>admin1</td><td>123</td><td><button>删除</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <h1>添加图书管理员
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>username :</span>
+                    <input id="newmanagerusername" type="text" name="username" placeholder="username" />
+                </label>
+                <label>
+                    <span>password :</span>
+                    <input id="newmanagerpassword" type="text" name="password" placeholder="password" />
+                </label>
+                <label>
+                    <span>真实姓名 :</span>
+                    <input id="newmanagername" type="text" name="name" placeholder="name" />
+                </label>
+                <label>
+                    <span>电话 :</span>
+                    <input id="newmanagerphone" type="text" name="phone" placeholder="phone" />
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="addmanager" value="增加" />
+                </label>
+            </form>
+        </div>
+<!--个人信息修改-->
+        <div class="mainbar" id="div2">
+            <form action="" method="post" class="basic-grey">
+                <h1>个人信息修改
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>修改你的名字 :</span>
+                    <input id="nametext" type="text" name="name" placeholder="Your Full Name" />
+                </label>
+                <label>
+                    <span>修改你的电话 :</span>
+                    <input id="phonetext" type="text" name="phone" placeholder="Valid Email Address" />
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="updateInfo" value="修改" />
+                </label>
+            </form>
+        </div>
+        <!--图书管理-->
+        <div class="mainbar" id="div3">
+            <form action="" method="post" class="basic-grey">
+                <h1>管理图书
+                </h1>
+                <div id="lifebook">
+                    <table>
+
+                    </table>
+                </div>
+                <h1>添加新图书
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>书名 :</span>
+                    <input id="newbookname" type="text" name="bookname"/>
+                </label>
+                <label>
+                    <span>作者 :</span>
+                    <input id="newbookauthor" type="text" name="author" />
+                </label>
+                <label>
+                    <span>出版社 :</span>
+                    <input id="newbookpublisher" type="text" name="publisher"/>
+                </label>
+                <label>
+                    <span>类别 :</span>
+                    <input id="newbookcategory" type="text" name="category" />
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="addbook" value="增加" />
+                </label>
+            </form>
+        </div>
+        <!--借阅管理-->
+        <div class="mainbar" id="div4">
+            <h2>所有记录查询</h2>
+            <div id="recordlist">
+                <table>
+                    <tr>
+                        <th>recordid</th><th>username</th><th>真实姓名</th>
+                        <th>借出书本id</th><th>书名</th><th>借出日期</th><th>归还日期</th>
+                        <th>已归还</th><th>罚款情况</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td>lst</td><td>lst</td>
+                        <td>1</td><td>《AAA》</td><td>2023-06-25</td><td>2023-06-25</td>
+                        <td>归还</td><td>0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--读者管理-->
+        <div class="mainbar" id="div5">
+            <form action="" method="post" class="basic-grey">
+                <h1>管理用户
+                </h1>
+                <div id="lifeuser">
+                    <table>
+                        <tr>
+                            <th>用户id</th><th>用户账号</th><th>用户名字</th><th>用户手机</th><th>类别</th><th>正在借阅数</th><th>删除</th>
+                        </tr>
+                        <tr>
+                            <td>1</td><td>admin1</td><td>admin1</td><td>123</td><td>教师</td><td>11</td><td><button>删除</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <h1>添加用户
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>username :</span>
+                    <input id="newusername" type="text" name="username" placeholder="username" />
+                </label>
+                <label>
+                    <span>password :</span>
+                    <input id="newpassword" type="text" name="password" placeholder="password" />
+                </label>
+                <label>
+                    <span>真实姓名 :</span>
+                    <input id="newname" type="text" name="name" placeholder="name" />
+                </label>
+                <label>
+                    <span>电话 :</span>
+                    <input id="newphone" type="text" name="phone" placeholder="phone" />
+                </label>
+                <label>
+                    <span>是教师? :</span>
+                    <input type="checkbox">
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="adduser" value="增加" />
+                </label>
+            </form>
+        </div>
+        <!--借书-->
+        <div class="mainbar" id="div6">
+            <form action="" method="post" class="basic-grey">
+                <h1>借书
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>username :</span>
+                    <input id="borrowusername" type="text" name="borrowusername"/>
+                </label>
+                <label>
+                    <span>书本id :</span>
+                    <input id="borrowbookid" type="text" name="borrowbookid" />
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="borrow" value="借书" />
+                </label>
+                <label>
+<!--                    <span>提示: </span>-->
+<!--                    <p>你已借15/15本书,达到上限无法借书;你有借书超时欠款无法借书,请先于还书处支付</p>-->
+<!--                    <p>书本已借走，不在馆中</p>-->
+                </label>
+            </form>
+        </div>
+        <!--还书-->
+        <div class="mainbar" id="div6-2">
+            <form action="" method="post" class="basic-grey">
+                <h1>还书
+                    <span>Please fill all informations in the fields.</span>
+                </h1>
+                <label>
+                    <span>输入username :</span>
+                    <input id="inputusername" type="text" name="name" placeholder="填写username" />
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" id="orderbtn" value="查询" />
+                </label>
+                <div id="yourorder">
+
+
+                </div>
+            </form>
+        </div>
+        <!--所有图书-->
+        <div class="mainbar" id="div7">
+            <h2>图书查询</h2>
+            <div id="booklist">
+                <table>
+                    <tr>
+                        <th>bookid</th><th>书名</th><th>作者</th><th>出版社</th><th>类别</th><th>借阅情况</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td>《守男德，以小e为榜样》</td><td>里昂成玉 </td><td>精思苑出版社</td><td>道德修养</td><td>在馆</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--我的借阅-->
+        <div class="mainbar" id="div8">
+            <h2>我的借阅</h2>
+            <div id="myrecordlist">
+                <table>
+                    <tr>
+                        <th>记录id</th><th>bookid</th><th>借出日期</th><th>归还日期</th><th>是否归还</th><th>罚钱</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td>1</td><td>2023-06-25</td><td>2023-06-25</td><td>归还</td><td>0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </article>
+    <!--左侧导航区-->
+    <aside>
+        <nav role="option">
+            <ul>
+                <li>导航列表</li>
+                <li><a  class="active" id="button1">sys管理图书管理员</a></li>
+                <li><a  class="active" id="button2">个人信息修改</a></li>
+                <li><a  class="active" id="button3">图书管理</a></li>
+                <li><a  class="active" id="button4">借阅管理</a></li>
+                <li><a  class="active" id="button5">读者管理</a></li>
+                <li><a  class="active" id="button6">借书</a></li>
+                <li><a  class="active" id="button6-2">还书</a></li>
+                <li><a  class="active" id="button7">图书查询</a></li>
+                <li><a  class="active" id="button8">我的借阅</a></li>
+            </ul>
+        </nav>
+    </aside>
+</main>
+
+<script src="static/js/jquery.min.js"></script>
+<script>
+    var type = 0
+    var username = "null"
+    var phone = "1"
+    var name = ""
+    function onlogoutclick(){
+        window.location="/logout";
+        alert("退出成功!")
+    }
+    function getDate(){
+        var today="";
+        var myDate = new Date();
+        var year = myDate.getFullYear(); //获取当前年
+        var mon = myDate.getMonth() + 1; //获取当前月
+        var date = myDate.getDate(); //获取当前日
+        var h = myDate.getHours();//获取当前小时数(0-23)
+        var m = myDate.getMinutes();//获取当前分钟数(0-59)
+        var s = myDate.getSeconds();//获取当前秒
+        today+=(year+"-"+mon+"-"+date+" "+h+":"+m+":"+s);
+        return today;
+    }
+    function msToDate (msec) {
+        let datetime = new Date(msec);
+        let year = datetime.getFullYear();
+        let month = datetime.getMonth();
+        let date = datetime.getDate();
+        let hour = datetime.getHours();
+        let minute = datetime.getMinutes();
+        let second = datetime.getSeconds();
+
+        let result1 = year +
+            '-' +
+            ((month + 1) >= 10 ? (month + 1) : '0' + (month + 1)) +
+            '-' +
+            ((date + 1) < 10 ? '0' + date : date) +
+            ' ' +
+            ((hour + 1) < 10 ? '0' + hour : hour) +
+            ':' +
+            ((minute + 1) < 10 ? '0' + minute : minute) +
+            ':' +
+            ((second + 1) < 10 ? '0' + second : second);
+
+        let result2 = year +
+            '-' +
+            ((month + 1) >= 10 ? (month + 1) : '0' + (month + 1)) +
+            '-' +
+            ((date + 1) < 10 ? '0' + date : date);
+
+        let result = {
+            hasTime: result1,
+            withoutTime: result2
+        };
+
+        return result;
+    }
+    function adduser(){
+        var istea=0
+        if ($("input[type='checkbox']").is(':checked')==true)
+            istea=1
+        $.post("addUser",{
+                "username":$("#newusername").val(),
+                "password":$("#newpassword").val(),
+                "name":$("#newname").val(),
+                "phone":$("#newphone").val(),
+                "type":istea,
+                "number":0
+            },
+            function(data){
+                alert("添加成功!")
+                window.location="/main"
+            },
+            "json");
+    }
+    function addmanager(){
+        $.post("addUser",{
+                "username":$("#newmanagerusername").val(),
+                "password":$("#newmanagerpassword").val(),
+                "name":$("#newmanagername").val(),
+                "phone":$("#newmanagerphone").val(),
+                "type":2,
+                "number":0
+            },
+            function(data){
+                alert("添加成功!")
+                window.location="/main"
+            },
+            "json");
+    }
+    function updateInfo(){
+        $.post("updateUser",{
+                "name":$("#nametext").val(),
+                "phone":$("#phonetext").val(),
+            },
+            function(data){
+                alert("修改成功!")
+            },
+            "json");
+    }
+    function addbook(){
+        $.post("addBook",{
+                "bookname":$("#newbookname").val(),
+                "author":$("#newbookauthor").val(),
+                "publisher":$("#newbookpublisher").val(),
+                "category":$("#newbookcategory").val(),
+                "status":0
+            },
+            function(data){
+                alert("添加成功!")
+                window.location="/main"
+            },
+            "json");
+    }
+    function getBooks(){
+        $.getJSON("getBooks",function(data){
+                var res=data;
+                var str="";
+                str += "<table><tr><th>bookid</th><th>书名</th><th>作者</th><th>出版社</th><th>类别</th><th>借阅情况</th>"
+                $.each(res,function(i,obj){
+                    str+="<tr>";
+                    str+="<td>"+obj.bookid+"</td>";
+                    str+="<td>"+obj.bookname+"</td>";
+                    str+="<td>"+obj.author+"</td>";
+                    str+="<td>"+obj.publisher+"</td>";
+                    str+="<td>"+obj.category+"</td>";
+                    if(obj.status==0)
+                        str+="<td>在馆</td>";
+                    if(obj.status==1)
+                        str+="<td>已借出</td>";
+                    str+="</tr>"
+                });
+                str+="</table>"
+                $("#booklist").html(str);
+        });
+    }
+    function getRecordsByUsername(){
+        $.getJSON("getRecordsByUsername",function(data){
+            var res=data;
+            var str="";
+            str += "<table><tr><th>记录id</th><th>bookid</th><th>借出日期</th><th>归还日期</th><th>是否归还</th><th>罚钱</th></tr>"
+            $.each(res,function(i,obj){
+                str+="<tr>";
+                str+="<td>"+obj.recordid+"</td>";
+                str+="<td>"+obj.bookid+"</td>";
+                str+="<td>"+msToDate(obj.borrowdate).withoutTime+"</td>";
+                str+="<td>"+msToDate(obj.borrowdate).withoutTime+"</td>";
+                str+="<td>"+obj.isreturn+"</td>";
+                str+="<td>"+obj.price+"</td>";
+                str+="</tr>"
+            });
+            str+="</table>"
+            $("#myrecordlist").html(str);
+        });
+    }
+    function deluser(){
+        var delid=$(this).attr("data-id");
+        $.post("delUser",{
+                "userid":delid
+            },
+            function(data){
+                alert("删除成功!")
+            },
+            "json");
+    }
+    function delbook(){
+        var delid=$(this).attr("data-id");
+        $.post("delBook",{
+                "bookid":delid
+            },
+            function(data){
+                alert("删除成功!")
+            },
+            "json");
+    }
+    function showmanager(){
+        $.getJSON("getUsers",function(data){
+                var res=data;
+                var str="";
+                str += "<table><tr><th>用户id</th><th>管理员账号</th><th>管理员名字</th><th>管理员手机</th><th>删除</th></tr>"
+                $.each(res,function(i,obj){
+                    if(obj.type==2) {
+                        str += "<tr>";
+                        str += "<td>" + obj.userid + "</td>";
+                        str += "<td>" + obj.username + "</td>";
+                        str += "<td>" + obj.name + "</td>";
+                        str += "<td>" + obj.phone + "</td>";
+                        str += "<td><button class='deluser' data-id=" + obj.userid + ">删除</button></td>";
+                        str += "</tr>"
+                    }
+                });
+                str+="</table>"
+                $("#lifemanager").html(str);
+            });
+    }
+    function showuser(){
+        $.post("getUsers",{},
+            function(data){
+                var res=data;
+                var str="";
+                str += "<table><th>用户id</th><th>用户账号</th><th>用户名字</th><th>用户手机</th><th>类别</th><th>正在借阅数</th><th>删除</th>"
+                $.each(res,function(i,obj){
+                    if(obj.type==1 || obj.type==0) {
+                        str += "<tr>";
+                        str += "<td>" + obj.userid + "</td>";
+                        str += "<td>" + obj.username + "</td>";
+                        str += "<td>" + obj.name + "</td>";
+                        str += "<td>" + obj.phone + "</td>";
+                        if(obj.type==1)
+                            str += "<td>教师</td>";
+                        else
+                            str += "<td>学生</td>";
+                        str += "<td>" + obj.number + "</td>";
+                        str += "<td><button class='deluser' data-id=" + obj.userid + ">删除</button></td>";
+                        str += "</tr>"
+                    }
+                });
+                str+="</table>"
+                $("#lifeuser").html(str);
+            },
+            "json");
+    }
+    function showbook(){
+        $.post("getBooks",{
+            },
+            function(data){
+                var res=data;
+                var str="";
+                str += "<table><tr><th>图书id</th><th>书名</th><th>作者</th><th>出版社</th><th>种类</th><th>状态</th><th>删除</th></tr>"
+                $.each(res,function(i,obj){
+                    str+="<tr>";
+                    str+="<td>"+obj.bookid+"</td>";
+                    str+="<td>"+obj.bookname+"</td>";
+                    str+="<td>"+obj.author+"</td>";
+                    str+="<td>"+obj.publisher+"</td>";
+                    str+="<td>"+obj.category+"</td>";
+                    if(obj.status==0)
+                        str+="<td>在馆</td>";
+                    else
+                        str+="<td>已借</td>"
+                    str+="<td><button class='delbook' data-id="+obj.bookid+">删除</button></td>";
+                    str+="</tr>"
+                });
+                str+="</table>"
+                $("#lifebook").html(str);
+            },
+            "json");
+    }
+    function showrecord() {
+        $.post("getRecords", {},
+            function (data) {
+                var res = data;
+                var str = "";
+                str+="<table><tr><th>recordid</th><th>username</th></th><th>借出书本id</th><th>借出日期</th><th>归还日期</th><th>已归还</th><th>罚款情况</th>"
+                $.each(res, function (i, obj) {
+                    str += "<tr>";
+                    str += "<td>" + obj.recordid + "</td>";
+                    str += "<td>" + obj.username + "</td>";
+                    str += "<td>" + obj.bookid + "</td>";
+                    str+="<td>"+msToDate(obj.borrowdate).withoutTime+"</td>";
+                    if(obj.isreturn==1) {
+                        str += "<td>" + msToDate(obj.returndate).withoutTime + "</td>";
+                        str += "<td>已归还</td>";
+                        str += "<td>" + obj.price + "</td>";
+                    }
+                    else{
+                        str += "<td>未归还</td>"
+                        str += "<td>未归还</td>";
+                        str += "<td>未归还</td>";
+                    }
+
+
+                    // str += "<td><button class='delbook' data-id=" + obj.bookid + ">删除</button></td>";
+                    str += "</tr>"
+                });
+                str += "</table>"
+                $("#recordlist").html(str);
+            },
+            "json");
+    }
+    function yourorders(){
+        var type=""
+        $.post("getInfo",{
+                "username":$("#inputusername").val()
+            },
+            function(data){
+                type=data.type;
+            },
+            "json");
+        $.post("getRecordsByInputUsername",{
+                "username":$("#inputusername").val()
+            },
+            function(data){
+                var res = data;
+                var str = "";
+                str+="<table><tr><th>借出书本id</th><th>借出日期</th><th>罚款情况</th><th>还书</th></tr>"
+                $.each(res, function (i, obj) {
+                    var price=0
+                    if(obj.isreturn==0) {
+                        let time = (new Date()-new Date(msToDate(obj.borrowdate).withoutTime)) / (1000*3600*24);
+                        time = Math.floor(time);
+                        if(type==1) {
+                            if(time>60)
+                                price=0.1*(time-60)
+                        }
+                        else{
+                            if(time>30)
+                                price=0.1*(time-30)
+                        }
+                        str += "<tr>";
+                        str += "<td>" + obj.bookid + "</td>";
+                        str += "<td>" + msToDate(obj.borrowdate).withoutTime + "</td>";
+                        str += "<td>" + price.toFixed(2) + "</td>";
+                        str += "<td><button class='returnbook' data-id=" + obj.recordid
+                            +" data-bookid="+obj.bookid
+                            +" data-username=" +$("#inputusername").val()+ " data-price="+price+">还书</button></td>";
+                        str += "</tr>"
+                    }
+                });
+                str += "</table>"
+                $("#yourorder").html(str);
+                $(".returnbook").on("click",returnbook);
+            },
+            "json");
+    }
+    function borrow(){
+        var username
+        var number
+        var type
+        var tip=""
+        var flag=1
+        var username=$("#borrowusername").val()
+        var bookid=$("#borrowbookid").val()
+        //检测用户是否符合借书条件
+        $.post("getInfo",{
+                "username":username
+            },
+            function(data){
+                type=data.type
+                number=data.number;
+                if(type==0&&number>=10 || type==1&&number>=15){flag=0;tip+="你已达到借阅上限!"}
+            },
+            "json");
+        $.post("getRecordsByInputUsername",{
+                "username":username
+            },
+            function(data){
+                var res = data;
+                var pay=0
+                $.each(res, function (i, obj) {
+                    if(obj.isreturn==0) {
+                        let time = (new Date()-new Date(msToDate(obj.borrowdate).withoutTime)) / (1000*3600*24);
+                        time = Math.floor(time);
+                        if(type==1&&time>60||type==0&&time>30) {
+                            pay=1
+                        }
+                    }
+                });
+                if(pay==1){
+                    flag=0;tip+="你有超时欠款请先于还书处付款!"
+                }
+            },
+            "json");
+        //检测书籍是否被在馆
+        $.post("getBooks",{
+            },
+            function(data){
+                var res=data;
+                var isok=0;
+                $.each(res,function(i,obj){
+                    if(obj.status==0&&obj.bookid==bookid){
+                        isok=1;
+                    }
+                });
+                if(isok==0){flag=0;tip+="书籍已被借走或不存在!"}
+            },
+            "json");
+        if(flag==0) {
+            alert(tip)
+        }
+        //合法下修改三表
+        else{
+            $.post("updateUserNum2",{
+                    "username":username
+                },
+                function(data) {
+                    console.log("update user")
+                }, "json");
+            $.post("updateBook2",{
+                    "bookid":bookid
+                },
+                function(data) {
+                    console.log("update book")
+                }, "json");
+            $.post("addRecord",{
+                    "username":username,
+                    "bookid":bookid
+                },
+                function(data) {
+                    console.log("update record")
+                    alert("借阅成功!请按时归还!")
+                    window.location="/main";
+                }, "json");
+        }
+    }
+    function returnbook(){
+        orderid=$(this).attr("data-id")
+        username=$(this).attr("data-username")
+        bookid=$(this).attr("data-bookid")
+        price=$(this).attr("data-price")
+        returndate=getDate()
+        console.log(orderid,username,price,returndate)
+        $.post("updateUserNum",{
+                "username":username
+            },
+            function(data) {
+            console.log("update user")
+        }, "json");
+        $.post("updateBook",{
+                "bookid":bookid
+            },
+            function(data) {
+                console.log("update book")
+                //将book表的statu改0
+            }, "json");
+        $.post("updateRecord",{
+                "recordid":orderid,
+                "price":price
+            },
+            function(data) {
+                console.log("update record")
+                alert("支付"+price+"元，归还成功!")
+                //将book表的statu改0
+            }, "json");
+
+    }
+    function div1(){
+        $("#div1").show();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div2(){
+        $("#div1").hide();$("#div2").show();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div3(){
+        $("#div1").hide();$("#div2").hide();$("#div3").show();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div4(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").show();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div5(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").show();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div6(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").show();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+    }
+    function div6_2(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").show();$("#div7").hide();$("#div8").hide();
+    }
+    function div7(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").show();$("#div8").hide();
+    }
+    function div8(){
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").show();
+    }
+    function init(){
+        // var 教师还是学生
+        $.ajaxSetup({async:false});
+        $.getJSON("userInfo",function(data){
+            type=data["type"]
+            username=data["username"]
+            phone=data["phone"]
+            name=data["name"]
+        });
+        var hello = document.getElementById("welcome")
+        hello.innerText = username;
+        $("#nametext").val(name);
+        $("#phonetext").val(phone);
+        // 系统管理员
+        if(type==3){
+            $("#button2").hide();
+            $("#button3").hide();
+            $("#button4").hide();
+            $("#button5").hide();
+            $("#button6").hide();
+            $("#button6-2").hide();
+            $("#button7").hide();
+            $("#button8").hide();
+        }
+        // 图书管理员
+        else if(type==2){
+            $("#button1").hide();
+            $("#button7").hide();
+            $("#button8").hide();
+        }
+        // 用户
+        else{
+            $("#button1").hide();
+            $("#button3").hide();
+            $("#button4").hide();
+            $("#button5").hide();
+            $("#button6").hide();
+            $("#button6-2").hide();
+        }
+        $("#button1").on("click",div1);
+        $("#button2").on("click",div2);
+        $("#button3").on("click",div3);
+        $("#button4").on("click",div4);
+        $("#button5").on("click",div5);
+        $("#button6").on("click",div6);
+        $("#button6-2").on("click",div6_2);
+        $("#button7").on("click",div7);
+        $("#button8").on("click",div8);
+        $("#btn-log").on("click",onlogoutclick);
+        $("#updateInfo").on("click",updateInfo);
+        $("#addmanager").on("click",addmanager);
+        $("#adduser").on("click",adduser);
+        $("#addbook").on("click",addbook);
+        $("#orderbtn").on("click",yourorders);
+        $("#borrow").on("click",borrow);
+        $("#div1").hide();$("#div2").hide();$("#div3").hide();$("#div4").hide();$("#div5").hide();$("#div6").hide();$("#div6-2").hide();$("#div7").hide();$("#div8").hide();
+        getBooks();
+        showmanager();
+        showbook();
+        showrecord();
+        showuser();
+        getRecordsByUsername();
+        $(".deluser").on("click",deluser);
+        $(".delbook").on("click",delbook);
+    }
+    init();
+</script>
+</body>
+</html>
